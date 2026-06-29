@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+sidebar = st.sidebar    
+
+
 
 st.title("AI Predictive Maintenance Dashboard")
 
@@ -24,7 +27,7 @@ if st.button("Predict Failure"):
     }
 
     response = requests.post(
-        "https://your-fastapi.onrender.com/predict",
+        "https://predictive-maintenance-hzxk.onrender.com/predict",
         json=payload
     )
 
