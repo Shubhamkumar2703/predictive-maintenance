@@ -32,7 +32,7 @@ if st.button("Predict Failure"):
     }
 
     response = requests.post(
-        "http://localhost:8081/api/predict",
+        "https://predictive-maintenance-hzxk.onrender.com/predict",
         json=payload
     )
 
@@ -58,7 +58,7 @@ if st.button("Predict Failure"):
 st.subheader("Prediction History")
 
 history_response = requests.get(
-    "http://localhost:8081/api/history"
+    "https://predictive-maintenance-hzxk.onrender.com/api/history"
 )
 
 history = history_response.json()
@@ -103,7 +103,7 @@ if uploaded_file is not None:
         }
 
         response = requests.post(
-            "http://localhost:8081/api/predict",
+            "https://predictive-maintenance-hzxk.onrender.com/predict",
             json=payload
         )
 
