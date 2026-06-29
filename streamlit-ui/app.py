@@ -73,3 +73,46 @@ st.subheader("Prediction Distribution")
 chart_data = df["prediction"].value_counts()
 
 st.bar_chart(chart_data)
+
+st.subheader("Bulk Prediction using CSV")
+
+uploaded_file = st.file_uploader(
+    "Upload CSV File",
+    type=["csv"]
+)
+
+if uploaded_file is not None:
+
+    bulk_df = pd.read_csv(uploaded_file)
+
+    st.write("Uploaded Data")
+    st.dataframe(bulk_df)
+
+    predictions = []
+
+    for index, row in bulk_df.iterrows():
+
+        payload = {
+            "sensor_2": row["sensor_2"],
+            "sensor_3": row["sensor_3"],
+            "sensor_4": row["sensor_4"],
+            "sensor_7": row["sensor_7"],
+            "sensor_11": row["sensor_11"],
+            "sensor_12": row["sensor_12"],
+            "sensor_15": row["sensor_15"]
+        }
+
+        response = requests.post(
+            "http://localhost:8081/api/predict",
+            json=payload
+        )
+
+        result = response.json()
+
+        predictions.append(result["status"])
+
+    bulk_df["Prediction"] = predictions
+
+    st.subheader("Prediction Results")
+
+    st.dataframe(bulk_df)
