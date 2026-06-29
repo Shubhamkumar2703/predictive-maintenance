@@ -21,7 +21,7 @@ public class PredictionController {
     @PostMapping("/predict")
     public Object predict(@RequestBody SensorRequest request) {
 
-        String fastApiUrl = "http://127.0.0.1:8000/predict";
+        String fastApiUrl = "https://predictive-maintenance-hzxk.onrender.com/predict";
 
         RestTemplate restTemplate = new RestTemplate();
 
